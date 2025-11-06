@@ -9,9 +9,8 @@ class multiMotor
         multiMotor(float voltage);
         int initSingle(int ctr1, int ctr2, int id, int pwm);
         int initDual(int ctr1, int ctr2, int ctr3, int ctr4, int pwmA, int pwmB, float ocMaxWattage);
-        int driveSingle(String dir, int id, float power);
-        int driveDual(String dir, float power);
-        int overclock(float ocWattage);    
+        int driveSingle(int id, float power);
+        int driveDual(float power, float ocWattage);  
     private:
         int in1;
         int in2;
