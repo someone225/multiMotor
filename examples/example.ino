@@ -1,0 +1,26 @@
+
+#include <multiMotor.h>
+
+
+multiMotor testMotor; //initializes a multiMotor class named testMotor
+//you can think of a multiMotor class as representing an L293n motor driver
+void setup() {
+  // put your setup code here, to run once:
+}
+
+void loop() {
+
+  //running a single-channel motor
+  testMotor.initSingle(1, 2, 9, 1); //declares a single-channel motor onto channel id 1, with pins in1 = d1, in2 = d2, enA = d9 
+  testMotor.driveSingle("FORWARDS", 1, 100) //runs the motor on channel id 1 forwards at 100% power
+  //you can declare two single-channel motors as the L293n has two channels
+  
+
+  //running a dual-channel motor
+  testMotor.initDual(1, 2, 3, 4, 9, 10, 12) //declares a dual-channel motor with pins in1 = d1, in2 = d2, in3 = d3, in4 = d4, enA = d9, enB = d10, and a max overclock TGP of +12W
+  testMotor.driveDual("FORWARDS", 100) //drives the declared dual-channel motor forwards at 100% power
+
+  //if the circuit is set up correctly, dual-channel motors are overclockeable through the multiMotor.overclock() function
+  testMotor.overclock(12.0) //overclocks the dual-channel motor with an additional 12W
+  
+}
