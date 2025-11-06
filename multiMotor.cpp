@@ -3,7 +3,7 @@
 
 
 
-multiMotor::multiMotor()
+multiMotor::multiMotor(float voltage)
 {
     in1 = 0;
     in2 = 0;
@@ -13,6 +13,7 @@ multiMotor::multiMotor()
     enA = 0;
     enB = 0;
 
+    nom_voltagge = voltage;
     ocLimit = 0;
 }
 
@@ -190,9 +191,11 @@ int multiMotor::overclock(float ocWattage)
     - 0, if overclock wattage has exceeded safe limits or failed
 */
 {
+    float peakWattage = nom_voltage * 1.2;
+
     if(ocWattage <= ocLimit)
     {
-    analogWrite(enB, round(ocWattage * (255/14.4) ) );
+    analogWrite(enB, round(ocWattage * (255/peakWattage) ) );
     return 1;
     }
     else

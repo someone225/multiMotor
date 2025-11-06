@@ -6,7 +6,7 @@
 class multiMotor
 {
     public:
-        multiMotor();
+        multiMotor(float voltage);
         int initSingle(int ctr1, int ctr2, int id, int pwm);
         int initDual(int ctr1, int ctr2, int ctr3, int ctr4, int pwmA, int pwmB, float ocMaxWattage);
         int driveSingle(String dir, int id, float power);
@@ -21,6 +21,7 @@ class multiMotor
         int enA;
         int enB;
 
+        float nom_voltage;
         float ocLimit;
 };
 
