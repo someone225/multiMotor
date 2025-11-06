@@ -33,25 +33,25 @@ int multiMotor::initSingle(int ctr1, int ctr2, int id, int pwm)
     switch id
     {
         case 1:
-        this->in1 = ctr1;
-        this->in2 = ctr2;
-        this->enA = pwm;
+        in1 = ctr1;
+        in2 = ctr2;
+        enA = pwm;
 
-        pinMode(this->in1, OUTPUT);
-        pinMode(this->in2, OUTPUT);
-        pinMode(this->enA, OUTPUT);
+        pinMode(in1, OUTPUT);
+        pinMode(in2, OUTPUT);
+        pinMode(enA, OUTPUT);
         
         return 1;
         break;
         
         case 2:
-        this->in3 = ctr1;
-        this->in4 = ctr2;
-        this->enB = pwm;
+        in3 = ctr1;
+        in4 = ctr2;
+        enB = pwm;
 
-        pinMode(this->in3, OUTPUT);
-        pinMode(this->in4, OUTPUT);
-        pinMode(this->enB, OUTPUT);
+        pinMode(in3, OUTPUT);
+        pinMode(in4, OUTPUT);
+        pinMode(enB, OUTPUT);
 
         return 2;
 
@@ -74,21 +74,21 @@ int multiMotor::initDual(int ctr1, int ctr2, int ctr3, int ctr4, int pwmA, int p
 */
 {
 
-    this->in1 = ctr1;
-    this->in2 = ctr2;
-    this->in3 = ctr3;
-    this->in4 = ctr4;
-    this->enA = pwmA;
-    this->enB = pwmB;
+    in1 = ctr1;
+    in2 = ctr2;
+    in3 = ctr3;
+    in4 = ctr4;
+    enA = pwmA;
+    enB = pwmB;
 
-    this->ocLimit = ocMaxWattage;
+    ocLimit = ocMaxWattage;
 
-    pinMode(this->in1, OUTPUT);
-    pinMode(this->in2, OUTPUT);
-    pinMode(this->in3, OUTPUT);
-    pinMode(this->in4, OUTPUT);
-    pinMode(this->enA, OUTPUT);
-    pinMode(this->enB, OUTPUT);
+    pinMode(in1, OUTPUT);
+    pinMode(in2, OUTPUT);
+    pinMode(in3, OUTPUT);
+    pinMode(in4, OUTPUT);
+    pinMode(enA, OUTPUT);
+    pinMode(enB, OUTPUT);
 
     return 1;
 }
@@ -111,32 +111,32 @@ returns:
         case 1:
             if(dir == "FORWARDS")
             {
-            digitalWrite(this->in1, HIGH);
-            digitalWrite(this->in2, LOW);
+            digitalWrite(in1, HIGH);
+            digitalWrite(in2, LOW);
             }
             else if(dir == "REVERSE")
             {
-            digitalWrite(this->in1, LOW);
-            digitalWrite(this->in2, HIGH);
+            digitalWrite(in1, LOW);
+            digitalWrite(in2, HIGH);
             }
 
-            analogWrite(this->enA, round(power * 2.55) )
+            analogWrite(enA, round(power * 2.55) )
             return 1;
             break;
 
         case 2:
             if(dir == "FORWARDS")
             {
-            digitalWrite(this->in3, HIGH);
-            digitalWrite(this->in4, LOW);
+            digitalWrite(in3, HIGH);
+            digitalWrite(in4, LOW);
             }
             else if(dir == "REVERSE")
             {
-            digitalWrite(this->in3, LOW);
-            digitalWrite(this->in4, HIGH);
+            digitalWrite(in3, LOW);
+            digitalWrite(in4, HIGH);
             }
 
-            analogWrite(this->enB, round(power * 2.55) )
+            analogWrite(enB, round(power * 2.55) )
             return 2;
             break;
 
@@ -159,20 +159,20 @@ int multiMotor::driveDual(char dir, float power)
 {
     if(dir == "FORWARDS")
     {
-    digitalWrite(this->in1, HIGH);
-    digitalWrite(this->in2, LOW);
-    digitalWrite(this->in3, HIGH);
-    digitalWrite(this->in4, LOW);
+    digitalWrite(in1, HIGH);
+    digitalWrite(in2, LOW);
+    digitalWrite(in3, HIGH);
+    digitalWrite(in4, LOW);
     }
     else if(dir == "REVERSE")
     {
-    digitalWrite(this->in1, LOW);
-    digitalWrite(this->in2, HIGH);
-    digitalWrite(this->in3, LOW);
-    digitalWrite(this->in4, HIGH);
+    digitalWrite(in1, LOW);
+    digitalWrite(in2, HIGH);
+    digitalWrite(in3, LOW);
+    digitalWrite(in4, HIGH);
     }
 
-    analogWrite(this->enA, round(power * 2.55) )
+    analogWrite(enA, round(power * 2.55) )
     return 1;
 }
 
@@ -186,9 +186,9 @@ int multiMotor::overclock(float ocWattage)
     - 0, if overclock wattage has exceeded safe limits or failed
 */
 {
-    if(ocWattage <= this->ocLimit)
+    if(ocWattage <= ocLimit)
     {
-    analogWrite(this->enB, round(ocWattage * (255/14.4) ) )
+    analogWrite(enB, round(ocWattage * (255/14.4) ) )
     return 1;
     }
     else
