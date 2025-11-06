@@ -1,4 +1,10 @@
+/* multiMotor
+ by Mark Sheng
 
+ modified 11 Nov 2025
+ by Mark Sheng
+ https://github.com/someone225/multiMotor
+*/
 #include <multiMotor.h>
 
 

@@ -1,6 +1,6 @@
-multiMotor KEYWORD1
-initSingle KEYWORD2
-initDual KEYWORD2
-driveSingle KEYWORD2
-driveDual KEYWORD2
-overclock KEYWORD2
+multiMotor	KEYWORD1
+initSingle	KEYWORD2
+initDual	KEYWORD2
+driveSingle	KEYWORD2
+driveDual	KEYWORD2
+overclock	KEYWORD2
