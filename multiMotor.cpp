@@ -2,6 +2,7 @@
 #include "multiMotor.h"
 
 
+
 multiMotor::multiMotor()
 {
     in1 = 0;
@@ -12,7 +13,7 @@ multiMotor::multiMotor()
     enA = 0;
     enB = 0;
 
-    ocLimit = 0
+    ocLimit = 0;
 }
 
 
@@ -30,33 +31,36 @@ int multiMotor::initSingle(int ctr1, int ctr2, int id, int pwm)
     - 0, if initialization is unsuccessful
 */
 {
-    switch id
+    switch (id)
     {
         case 1:
-        in1 = ctr1;
-        in2 = ctr2;
-        enA = pwm;
+            in1 = ctr1;
+            in2 = ctr2;
+            enA = pwm;
 
-        pinMode(in1, OUTPUT);
-        pinMode(in2, OUTPUT);
-        pinMode(enA, OUTPUT);
+            pinMode(in1, OUTPUT);
+            pinMode(in2, OUTPUT);
+            pinMode(enA, OUTPUT);
         
-        return 1;
-        break;
+            return 1;
+            break;
         
         case 2:
-        in3 = ctr1;
-        in4 = ctr2;
-        enB = pwm;
+            in3 = ctr1;
+            in4 = ctr2;
+            enB = pwm;
 
-        pinMode(in3, OUTPUT);
-        pinMode(in4, OUTPUT);
-        pinMode(enB, OUTPUT);
+            pinMode(in3, OUTPUT);
+            pinMode(in4, OUTPUT);
+            pinMode(enB, OUTPUT);
 
-        return 2;
+            return 2;
+            break;
 
         default:
-        return 0;
+            return 0;
+            break;
+    }
 }
 
 int multiMotor::initDual(int ctr1, int ctr2, int ctr3, int ctr4, int pwmA, int pwmB, float ocMaxWattage)
@@ -93,7 +97,7 @@ int multiMotor::initDual(int ctr1, int ctr2, int ctr3, int ctr4, int pwmA, int p
     return 1;
 }
 
-int multiMotor::driveSingle(char dir, int id, float power)
+int multiMotor::driveSingle(String dir, int id, float power)
 /*
 drives a single-channel motor
 args:
@@ -106,37 +110,37 @@ returns:
 - 0, if motor has not been found or successfully updated
 */
 {
-    switch id
+    switch (id)
     {
         case 1:
-            if(dir == "FORWARDS")
+            if(dir == "FORWARDS" )
             {
             digitalWrite(in1, HIGH);
             digitalWrite(in2, LOW);
             }
-            else if(dir == "REVERSE")
+            else if(dir == "REVERSE" )
             {
             digitalWrite(in1, LOW);
             digitalWrite(in2, HIGH);
             }
 
-            analogWrite(enA, round(power * 2.55) )
+            analogWrite(enA, round(power * 2.55) );
             return 1;
             break;
 
         case 2:
-            if(dir == "FORWARDS")
+            if(dir == "FORWARDS" )
             {
             digitalWrite(in3, HIGH);
             digitalWrite(in4, LOW);
             }
-            else if(dir == "REVERSE")
+            else if(dir == "REVERSE" )
             {
             digitalWrite(in3, LOW);
             digitalWrite(in4, HIGH);
             }
 
-            analogWrite(enB, round(power * 2.55) )
+            analogWrite(enB, round(power * 2.55) );
             return 2;
             break;
 
@@ -147,7 +151,7 @@ returns:
     }
 }
 
-int multiMotor::driveDual(char dir, float power)
+int multiMotor::driveDual(String dir, float power)
 /*
    drives a dual-channel motor
    args:
@@ -157,14 +161,14 @@ int multiMotor::driveDual(char dir, float power)
     - 1, if motor has been found and successfully updated
 */
 {
-    if(dir == "FORWARDS")
+    if(dir == "FORWARDS" )
     {
     digitalWrite(in1, HIGH);
     digitalWrite(in2, LOW);
     digitalWrite(in3, HIGH);
     digitalWrite(in4, LOW);
     }
-    else if(dir == "REVERSE")
+    else if(dir == "REVERSE" )
     {
     digitalWrite(in1, LOW);
     digitalWrite(in2, HIGH);
@@ -172,7 +176,7 @@ int multiMotor::driveDual(char dir, float power)
     digitalWrite(in4, HIGH);
     }
 
-    analogWrite(enA, round(power * 2.55) )
+    analogWrite(enA, round(power * 2.55) );
     return 1;
 }
 
@@ -188,7 +192,7 @@ int multiMotor::overclock(float ocWattage)
 {
     if(ocWattage <= ocLimit)
     {
-    analogWrite(enB, round(ocWattage * (255/14.4) ) )
+    analogWrite(enB, round(ocWattage * (255/14.4) ) );
     return 1;
     }
     else
